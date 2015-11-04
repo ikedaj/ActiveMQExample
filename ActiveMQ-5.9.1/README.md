@@ -47,10 +47,10 @@ Docker環境を利用して、ActiveMQ 5.9の動作確認を実施した際の�
 
 ## ActiveMQ 5.9.1をインストールする。
 
-| 項目                        | 値                                   | 
-|----------------------------|--------------------------------------|
-| 資材展開先                   |　/opt/activemq/apache-activemq-5.9.1　|
-| インストール先(上記ディレクトリをリンク) |　/opt/activemq/current               |
+| 項目                                     | 値                                  | 
+|------------------------------------------|-------------------------------------|
+| 資材展開先                               | /opt/activemq/apache-activemq-5.9.1 |
+| インストール先(上記ディレクトリをリンク) | /opt/activemq/current               |
 
 
 ```
@@ -75,7 +75,7 @@ Docker環境を利用して、ActiveMQ 5.9の動作確認を実施した際の�
 ```
 
 ## ActiveMQを起動する。
-* 起動時のログは、デフォルトでは　$ACTIVEMQ_HOME/data/activemq.log　に出力される。
+* 起動時のログは、デフォルトでは $ACTIVEMQ_HOME/data/activemq.log に出力される。
 
 ```
 [root@activemq /]# service activemq start
@@ -87,11 +87,11 @@ Docker環境を利用して、ActiveMQ 5.9の動作確認を実施した際の�
 * ブラウザから管理コンソールにログインする。
 * Manage ActiveMQ brokerをクリックすると、管理ユーザとパスワードの入力が要求され、管理画面に遷移する。
 
-| 項目     | 値                               | 
-|----------|---------------------------------|
-| コンソール  |　http://DockerホストのIPアドレス:8161/　|
-| ユーザ    |　admin　                           |
-| パスワード  |　admin                            |
+| 項目       | 値                                    | 
+|------------|---------------------------------------|
+| コンソール | http://DockerホストのIPアドレス:8161/ |
+| ユーザ     | admin                                 |
+| パスワード | admin                                 |
 
 
 ## 設定ファイル(activemq.xml)を編集し、JMS接続を有効化する。
@@ -101,7 +101,7 @@ Docker環境を利用して、ActiveMQ 5.9の動作確認を実施した際の�
 [root@activemq /]# vim /opt/activemq/current/conf/activemq.xml
 ```
 
-* brokerタグに　useJmx="true"　を追加する。
+* brokerタグに useJmx="true" を追加する。
 
 ```
     <broker xmlns="http://activemq.apache.org/schema/core"
@@ -111,7 +111,7 @@ Docker環境を利用して、ActiveMQ 5.9の動作確認を実施した際の�
 ```
 
 * managementContext を、createConnector="true" connectorPort="1099" へ変更する。
-　
+
 ```
         <managementContext>
             <managementContext createConnector="true" connectorPort="1099"/>
@@ -231,7 +231,7 @@ ActiveMQ.Advisory.MasterBroker                               0           0      
 * 送信対象のキュー名は TEST.FOO 。送信メッセージは固定。
 * App.javaはサンプルをコピペしてよい。
     * 変更箇所(HelloWorldProducer, HelloWorldConsumer の二箇所)
-        *  ActiveMQConnectionFactory("vm://localhost")　→ ActiveMQConnectionFactory("tcp://localhost:61616")
+        *  ActiveMQConnectionFactory("vm://localhost") → ActiveMQConnectionFactory("tcp://localhost:61616")
 
 ```
 [root@activemq /]# mkdir /tmp/sample
@@ -314,7 +314,7 @@ ActiveMQ.Advisory.Consumer.Queue.TEST.FOO                    0           0      
 ## キューにメッセージを送信する。
 * [サンプル](http://activemq.apache.org/hello-world.html)を参考に、メッセージ送信プログラム(Producer.java)を作成する。
 * 送信対象のキュー名は SAMPLE 。送信メッセージは実行時に引数として指定可能。
-* Producer.java の例
+* [Producer.java](https://github.com/ikedaj/ActiveMQExample/blob/master/ActiveMQ-5.9.1/Producer.java)
 
 * Producer.javaをコンパイルする。
 
